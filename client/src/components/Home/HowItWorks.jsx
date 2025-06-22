@@ -1,7 +1,6 @@
-import React from "react";
 import { FaUserPlus } from "react-icons/fa";
-import { MdFindInPage } from "react-icons/md";
 import { IoMdSend } from "react-icons/io";
+import { MdFindInPage } from "react-icons/md";
 
 const HowItWorks = () => {
   return (
@@ -14,24 +13,24 @@ const HowItWorks = () => {
               <FaUserPlus />
               <p>Create Account</p>
               <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Consequuntur, culpa.
+                Easily sign up to create your profile and start exploring job opportunities or
+                posting job openings. Your journey to career success begins here.
               </p>
             </div>
             <div className="card">
               <MdFindInPage />
               <p>Find a Job/Post a Job</p>
               <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Consequuntur, culpa.
+                Easily sign up to create your profile and start exploring job opportunities or
+                posting job openings. Your journey to career success begins here.
               </p>
             </div>
             <div className="card">
               <IoMdSend />
               <p>Apply For Job/Recruit Suitable Candidates</p>
               <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Consequuntur, culpa.
+                Submit your applications with confidence or review and select the best candidates to
+                fill your vacancies, streamlining the hiring process.
               </p>
             </div>
           </div>

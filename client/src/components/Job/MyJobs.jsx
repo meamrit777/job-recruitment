@@ -5,14 +5,17 @@ import { FaCheck } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../main";
+import ConfirmModal from "../ConfirmModal";
 
 const MyJobs = () => {
   const [myJobs, setMyJobs] = useState([]);
   const [editingMode, setEditingMode] = useState(null);
   const { isAuthorized, user } = useContext(Context);
 
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [jobIdToDelete, setJobIdToDelete] = useState(null);
+
   const navigateTo = useNavigate();
-  //Fetching all jobs
   useEffect(() => {
     const fetchJobs = async () => {
       try {
@@ -31,18 +34,14 @@ const MyJobs = () => {
     navigateTo("/");
   }
 
-  //Function For Enabling Editing Mode
   const handleEnableEdit = (jobId) => {
-    //Here We Are Giving Id in setEditingMode because We want to enable only that job whose ID has been send.
     setEditingMode(jobId);
   };
 
-  //Function For Disabling Editing Mode
   const handleDisableEdit = () => {
     setEditingMode(null);
   };
 
-  //Function For Updating The Job
   const handleUpdateJob = async (jobId) => {
     const updatedJob = myJobs.find((job) => job._id === jobId);
     await axios
@@ -58,7 +57,6 @@ const MyJobs = () => {
       });
   };
 
-  //Function For Deleting Job
   const handleDeleteJob = async (jobId) => {
     await axios
       .delete(`${import.meta.env.VITE_APP_API_URL}/job/delete/${jobId}`, {
@@ -72,9 +70,13 @@ const MyJobs = () => {
         toast.error(error.response.data.message);
       });
   };
+  const confirmDelete = async () => {
+    await handleDeleteJob(jobIdToDelete);
+    setConfirmOpen(false);
+    setJobIdToDelete(null);
+  };
 
   const handleInputChange = (jobId, field, value) => {
-    // Update the job object in the jobs state with the new value
     setMyJobs((prevJobs) =>
       prevJobs.map((job) => (job._id === jobId ? { ...job, [field]: value } : job))
     );
@@ -221,7 +223,7 @@ const MyJobs = () => {
                         </div>
                       </div>
                     </div>
-                    {/* Out Of Content Class */}
+
                     <div className="button_wrapper">
                       <div className="edit_btn_wrapper">
                         {editingMode === element._id ? (
@@ -245,9 +247,25 @@ const MyJobs = () => {
                           </button>
                         )}
                       </div>
-                      <button onClick={() => handleDeleteJob(element._id)} className="delete_btn">
+                      <button
+                        onClick={() => {
+                          setJobIdToDelete(element._id);
+                          setConfirmOpen(true);
+                        }}
+                        className="delete_btn"
+                      >
                         Delete
                       </button>
+                      {confirmOpen && (
+                        <ConfirmModal
+                          message="Are you sure you want to delete this job?"
+                          onConfirm={confirmDelete}
+                          onCancel={() => {
+                            setConfirmOpen(false);
+                            setJobIdToDelete(null);
+                          }}
+                        />
+                      )}
                     </div>
                   </div>
                 ))}

@@ -73,13 +73,18 @@ const Profile = () => {
     }
   };
 
-  if (loading || !profile) return <p className="loading-text">Loading...</p>;
+  if (loading || !profile)
+    return (
+      <p className="loading-text" style={{ marginBottom: "30rem" }}>
+        Loading...
+      </p>
+    );
 
   const isEmployer = profile.role === "Employer";
 
   return (
     <section className="profile page">
-      <div className="container">
+      <div className="container" style={{ marginBottom: !isEmployer ? "30rem" : "10rem" }}>
         <h3>Your Profile</h3>
 
         <div className="profile-info">

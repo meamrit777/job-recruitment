@@ -62,11 +62,17 @@ const JobDetails = () => {
               </span>
             )}
           </p>
-          {user && user.role === "Employer" ? (
-            <></>
-          ) : (
-            <Link to={`/application/${job._id}`}>Apply Now</Link>
-          )}
+          {user &&
+            user.role !== "Employer" &&
+            (job._id ? (
+              <Link to={`/application/${job._id}`} className="apply-now-link">
+                Apply Now
+              </Link>
+            ) : (
+              <button className="apply-now-button" disabled>
+                Apply Now
+              </button>
+            ))}
         </div>
       </div>
     </section>

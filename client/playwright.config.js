@@ -35,7 +35,7 @@ export default defineConfig({
     trace: "on-first-retry",
     launchOptions: {
       headless: false, // Uncomment to run tests in headful mode
-      slowMo: 500, // Uncomment to slow down operations by 0.5 sec
+      slowMo: 400, // Uncomment to slow down operations by 0.5 sec
     },
   },
 

@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import toast from "react-hot-toast";
-import { AiOutlineClose } from "react-icons/ai"; // Import the close icon
+import { AiOutlineClose } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxAvatar } from "react-icons/rx";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../main";
+import "./Navbar.css";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);

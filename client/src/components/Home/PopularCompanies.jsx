@@ -40,7 +40,8 @@ const PopularCompanies = () => {
         const res = await axios.get(`${import.meta.env.VITE_APP_API_URL}/company`, {
           withCredentials: true,
         });
-        setCompanies(res.data.companies);
+        const sorted = res.data.companies.sort((a, b) => b.jobCount - a.jobCount).slice(0, 5); // Top 5
+        setCompanies(sorted);
       } catch (error) {
         console.log(error);
         toast.error("Failed to fetch companies");
@@ -56,7 +57,7 @@ const PopularCompanies = () => {
         <h3>TOP COMPANIES</h3>
         <div className="banner">
           {companies.map((element, index) => (
-            <div className="card" key={index}>
+            <div className="card" key={index} style={{ margin: "5px" }}>
               <div className="content">
                 <div className="icon">{getRandomIcon()}</div>
                 <div className="text">
